@@ -1,24 +1,4 @@
-<?php
-  require('db.php');
-  session_start();
-  if(isset($_POST['addTOCart'])){
-    $a = $_SESSION['username'];
-    $query = "SELECT `u_id` FROM `users` WHERE `u_name` = '$a' ";
-    //$query1 = " SELECT u_id FROM users WHERE u_name= $a ";
-    $result1 = mysqli_query($con, $query);
-    $row = mysqli_fetch_row($result1);
-    if(!($result1)){
-      echo("Error description: " . mysqli_error($con));
-    }
-    $query2 = "INSERT INTO `cart`(`u_id`, `p_id`) VALUES ($row[0],'15')";
-    $result2 = mysqli_query($con, $query2);
-    if($result1){
-      echo '<script>alert("Product added to cart!")</script>';
-    }else{
-      echo("Error description: " . mysqli_error($con));
-    }
-  }
-?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,24 +9,67 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/css/toastr.css" rel="stylesheet"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <link rel="stylesheet" href="stylefile.css">
   <!-- No need to change any CSS here-->
 
 </head>
 <body>
+  <?php
+    require('db.php');
+    session_start();
+    $a = $_SESSION['username'];
+    $query = "SELECT `u_id` FROM `users` WHERE `u_name` = '$a' ";
+    //$query1 = " SELECT u_id FROM users WHERE u_name= $a ";
+    $result1 = mysqli_query($con, $query);
+    $row = mysqli_fetch_row($result1);
+    $_SESSION['u_idd'] = $row[0];
+    if(!($result1)){
+      echo("Error description: " . mysqli_error($con));
+    }
+    if(isset($_POST['addTOCart'])){
 
+      $query2 = "INSERT INTO `cart`(`u_id`, `p_id`) VALUES ($row[0],'15')";
+      $result2 = mysqli_query($con, $query2);
+      if($result1){?>
+      <script>
+    $(document).ready(function() {
+        toastr.info('ADDED TO CART!');
+    });
+ </script> <?php
+         // echo "string";
+      }else{
+        echo("Error description: " . mysqli_error($con));
+      }
+    }
+  $u_idd = $_SESSION['u_idd'];
+  $query6 = "SELECT COUNT(*) FROM `cart` WHERE `u_id` = $u_idd ";
+  $result6 = mysqli_query($con, $query6);
+  if($result6){
+  $rowcount = mysqli_fetch_array($result6);
+  $totalrows = $rowcount[0];
+  $_SESSION['totalrows'] = $totalrows;
+
+  }else{
+    echo("Error description: " . mysqli_error($con));
+  }
+  $printrow = $_SESSION['totalrows'];
+   ?>
   <div class="topnav">
   <h1 style="text-align:center; color:white">&nbsp &nbsp ONECLICK CART<sub style="font-size:40%"> FIND IT! LOVE IT! BUY IT!</sub></h1>
 
 </div>
 <div class="topnav">
-  <a href="home.html">&nbsp HOME &nbsp &nbsp</a>
-  <a href="smartPhones.html">&nbsp Smart Phones &nbsp &nbsp</a>
-  <a href="speakers.html">&nbsp Speakers &nbsp &nbsp</a>
-  <a href="headphones.html">&nbsp Headphones &nbsp &nbsp</a>
-  <a href="earphones.html">&nbsp Earphones &nbsp &nbsp</a>
+  <a href="home.php">&nbsp HOME &nbsp &nbsp</a>
+  <a href="smartPhones.php">&nbsp Smart Phones &nbsp &nbsp</a>
+  <a href="speakers.php">&nbsp Speakers &nbsp &nbsp</a>
+  <a href="headphones.php">&nbsp Headphones &nbsp &nbsp</a>
+  <a href="earphones.php">&nbsp Earphones &nbsp &nbsp</a>
   <a href="logout.php" style="float:right">&nbsp &nbsp Logout &nbsp &nbsp</a>
-  <a href="cart.php" style="float:right">&nbsp &nbsp &nbsp &nbsp <i class="fa fa-shopping-cart" aria-hidden="true"></i> &nbsp Cart &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp</a>
+  <a href="cart.php" style="float:right">&nbsp &nbsp &nbsp &nbsp <i class="fa fa-shopping-cart" aria-hidden="true"></i> &nbsp Cart(<?php echo $_SESSION['totalrows']; ?>) &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp</a>
 </div>
 
 <div class="container-fluid h-100">
@@ -207,10 +230,10 @@
         <div class="col-sm-6"  style="text-align:center;">
           <h6>Quick Links</h6>
           <ul class="footer-links">
-            <li><a href="smartPhones.html">Smart Phones</a></li>
-            <li><a href="speakers.html">Speakers</a></li>
-            <li><a href="headphones.html">Headphones</a></li>
-            <li><a href="earphones.html">Earphones</a></li>
+            <li><a href="smartPhones.php">Smart Phones</a></li>
+            <li><a href="speakers.php">Speakers</a></li>
+            <li><a href="headphones.php">Headphones</a></li>
+            <li><a href="earphones.php">Earphones</a></li>
           </ul>
         </div>
       </div>

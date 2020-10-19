@@ -35,7 +35,7 @@
         $result   = mysqli_query($con, $query);
         if ($result) {
           $_SESSION['username'] = $username;
-            header("Location: home.html");
+            header("Location: home.php");
         } else {
             echo "<div class='form'>
                   <h3>Required fields are missing.</h3><br/>

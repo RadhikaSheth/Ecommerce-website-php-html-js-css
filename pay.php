@@ -20,11 +20,11 @@
 
   </div>
   <div class="topnav">
-  <a href="home.html">&nbsp HOME &nbsp &nbsp</a>
-  <a href="smartPhones.html">&nbsp Smart Phones &nbsp &nbsp</a>
-  <a href="speakers.html">&nbsp Speakers &nbsp &nbsp</a>
-  <a href="headphones.html">&nbsp Headphones &nbsp &nbsp</a>
-  <a href="earphones.html">&nbsp Earphones &nbsp &nbsp</a>
+  <a href="home.php">&nbsp HOME &nbsp &nbsp</a>
+  <a href="smartPhones.php">&nbsp Smart Phones &nbsp &nbsp</a>
+  <a href="speakers.php">&nbsp Speakers &nbsp &nbsp</a>
+  <a href="headphones.php">&nbsp Headphones &nbsp &nbsp</a>
+  <a href="earphones.php">&nbsp Earphones &nbsp &nbsp</a>
   <a href="logout.php" style="float:right">&nbsp &nbsp Logout &nbsp &nbsp</a>
   <a href="cart.php" style="float:right">&nbsp &nbsp &nbsp &nbsp <i class="fa fa-shopping-cart" aria-hidden="true"></i> &nbsp Cart &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp</a>
 </div>
@@ -35,7 +35,7 @@
         <br>
         <br>
         <h1 style="color:black  ;text-align:center"> YOUR PAYMENT IS DONE!</h1>
-        <h1 style="color:#1A5276;text-align:center">  <a href="home.html">SHOP MORE</a> </h1>
+        <h1 style="color:#1A5276;text-align:center">  <a href="home.php">SHOP MORE</a> </h1>
       </div>
     </div>
 

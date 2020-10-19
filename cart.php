@@ -59,20 +59,20 @@
   $_SESSION['totalrows'] = $totalrows;
 
   }else{
-    echo("Error description: " . mysqli_error($con));
+    echo("1Error description: " . mysqli_error($con));
   }
-  $printrow = $_SESSION['totalrows'];
+
    ?>
   <div class="topnav">
   <h1 style="text-align:center; color:white">&nbsp &nbsp ONECLICK CART<sub style="font-size:40%"> FIND IT! LOVE IT! BUY IT!</sub></h1>
 
 </div>
 <div class="topnav">
-  <a href="home.html">&nbsp HOME &nbsp &nbsp</a>
-  <a href="smartPhones.html">&nbsp Smart Phones &nbsp &nbsp</a>
-  <a href="speakers.html">&nbsp Speakers &nbsp &nbsp</a>
-  <a href="headphones.html">&nbsp Headphones &nbsp &nbsp</a>
-  <a href="earphones.html">&nbsp Earphones &nbsp &nbsp</a>
+  <a href="home.php">&nbsp HOME &nbsp &nbsp</a>
+  <a href="smartPhones.php">&nbsp Smart Phones &nbsp &nbsp</a>
+  <a href="speakers.php">&nbsp Speakers &nbsp &nbsp</a>
+  <a href="headphones.php">&nbsp Headphones &nbsp &nbsp</a>
+  <a href="earphones.php">&nbsp Earphones &nbsp &nbsp</a>
     <a href="logout.php" style="float:right">&nbsp &nbsp Logout &nbsp &nbsp</a>
 
   <a href="cart.php" style="float:right">&nbsp &nbsp &nbsp &nbsp <i class="fa fa-shopping-cart" aria-hidden="true"></i> &nbsp Cart (<?php echo $_SESSION['totalrows']; ?>)&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp</a>
@@ -143,14 +143,16 @@
                     <button type="submit" class="btn btn-primary" name="udelete" value="<?php echo $cid;?>">Delete</button>
                     <?php  if(isset($_POST['udelete']))
                     {
-                     $x=$_POST['udelete'];
- //                     delete t
- // from   yourtable t
- // where  yourColumn = (select top 1 yourColumn from yourtable order by . . . )
-                     $query4 = "DELETE  FROM `cart`  WHERE `c_id` = '$x' LIMIT 1";
 
+                     $x=$_POST['udelete'];
+
+                     $query4 = "DELETE  FROM `cart`  WHERE `c_id` = '$x' LIMIT 1";
                      $result4 = mysqli_query($con,$query4);
-                     header("Location: cart.php");
+
+                     if($result4){
+                       echo '<script>window.location.href = "cart.php";</script>';
+                    }
+
                      // "DELETE  FROM `cart` WHERE `p_id` = $x ";
                     }?>
                     </form>
@@ -194,7 +196,7 @@
         $query5 =  "DELETE FROM `cart` WHERE `u_id`= '$u_idd'";
         $result5 = mysqli_query($con,$query5);
         if($result5){
-          header('Location: home.html');
+          header('Location: home.php');
         }else{
           echo("Error description: " . mysqli_error($con));
         }
